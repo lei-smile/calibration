@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/wulei/1、GIT/calibration/src/GPStoXYZ.cpp
+iostream
+-
+exception
+-
+cmath
+-
+fstream
+-
+GeographicLib/Geocentric.hpp
+-
+GeographicLib/LocalCartesian.hpp
+-
+stdio.h
+-
+iomanip
+-
+eigen3/Eigen/Dense
+-
+ceres/ceres.h
+-
+
