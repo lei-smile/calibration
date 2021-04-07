@@ -10,16 +10,8 @@
 
 #include <eigen3/Eigen/Dense>
 #include <ceres/ceres.h>
+#include <opencv2/opencv.hpp>
 
-
-using namespace std;
-using namespace GeographicLib;
-
-static const Geocentric& earth = Geocentric::WGS84();
-double lat0 = 30.63678740;
-double lon0 = 114.16599780;
-double h0   = 8.146;
-LocalCartesian gps_trans(lat0, lon0, h0, earth); //以原点构建局部坐标系(东北天)
 
 struct CalibData
 {
@@ -33,10 +25,30 @@ struct CalibData
     double z;
 };
 
+bool ReadConfigfile(const std::string& config_fileName,std::string& calib_data_file,
+                                            double& lat0, double& lon0, double& height0)
+{
+  cv::FileStorage config_read(config_fileName, cv::FileStorage::READ);
+  if(!config_read.isOpened())
+  {
+    std::cerr<<"Read the calib config file failed！"<<std::endl;
+    return false;
+  }
+
+  config_read["lat0"] >> lat0;
+  config_read["lon0"] >> lon0;
+  config_read["height0"] >> height0;
+  config_read["calib_data_file"] >> calib_data_file;
+
+  std::cout<<lat0<<" "<<lon0<<" "<<height0<<std::endl;
+  std::cout<<"calib_data_file::"<<calib_data_file<<std::endl;
+
+  return true;
+}
 
 void readCalibData(std::string fileName, std::vector<CalibData>& calib_datas, char separator = ',')
 {
-  fstream file_data(fileName);
+  std::fstream file_data(fileName);
   std::string line_str;
   while(std::getline(file_data, line_str))
   {
@@ -50,7 +62,7 @@ void readCalibData(std::string fileName, std::vector<CalibData>& calib_datas, ch
 
     std::getline(ss, factor_str, separator);
     data_read.lat = std::stod(factor_str);
-    std::cout<<fixed<<setprecision(8);
+    std::cout<<std::fixed<<std::setprecision(8);
     std::cout<<"lat::::"<<data_read.lat<<std::endl;
     std::getline(ss, factor_str, separator);
     data_read.lon = std::stod(factor_str);
@@ -75,36 +87,22 @@ struct RadarGPSFactorYTH
   template <typename T>
   bool operator()(const T *params, T *residual) const
   {
-    // delt x y in world
-    
+
     // T x_w = T(data_calib_.x);//- data_calib_.v_x*params[1];
     // T y_w = T(data_calib_.y);//- data_calib_.v_y*params[1];
     // T x_project = x_w*cos(params[0]) - y_w*sin(params[0]);
     // T y_project = x_w*sin(params[0]) + y_w*cos(params[0]);
 
-
-    // T z_project = data_calib_.z_w - params[2];
-    // x_project = x_project - delt_x*x_project/sqrt(x_project*x_project);
-    // y_project = y_project - delt_y*y_project/sqrt(y_project*y_project);
-
-    //T r = sqrt(x_project*x_project + y_project*y_project + z_project*z_project);
-    // T d = sqrt(x_project*x_project + y_project*y_project);
-    // T theta = asin(x_project/d);
-
-    // residual[0] = data_calib_.x_radar - d*x_project/d;
-    // residual[1] = data_calib_.y_radar - d*y_project/d;
-
-
-
-
     // T theta = T(data_calib_.theta) / T(180.0) * T(3.1415926);
     // // theta = asin(sin(theta) * params[1]);
     // T x_radar = data_calib_.r * sin(theta);
-    // //T y_radar = sqrt(pow(data_calib_.r * cos(theta), 2) - 6.0*6.0);
-    // T y_radar = data_calib_.r * cos(theta);
+    // // T y_radar = sqrt(pow(data_calib_.r * cos(theta), 2) - 4.0*4.0);    //法一
+    // T y_radar = data_calib_.r * cos(theta);                                                       //法二
 
     // residual[0] = x_radar - x_project;
     // residual[1] = y_radar - y_project;
+
+    //法三
     T range = T(data_calib_.r);
     T angle = T (data_calib_.theta) / 180.0 * 3.1415926;
     T d = sqrt(range*range - 4.0*4.0);
@@ -112,10 +110,8 @@ struct RadarGPSFactorYTH
     T y_radar = d*cos(angle);
     T x_radar_w = x_radar * cos(params[0]) - y_radar * sin(params[0]);
     T y_radar_w = x_radar * sin(params[0]) + y_radar * cos(params[0]);
-
     T x = T(data_calib_.x);
     T y = T(data_calib_.y);
-
     residual[0] = x_radar_w - x;
     residual[1] = y_radar_w - y;
 
@@ -133,7 +129,7 @@ struct RadarGPSFactorYTH
 
 void calibOptimizeRadar(std::vector<CalibData> points_calib)
 {
-  double radar_params[1] = {-1.3};
+  double radar_params[1] = {0.0};
   
   ceres::LossFunction *loss_function = new ceres::HuberLoss(0.1);
   ceres::Problem::Options problem_options;
@@ -163,65 +159,72 @@ void calibOptimizeRadar(std::vector<CalibData> points_calib)
 }
 
 
-// struct CURVE_FITTING_COST
-// {
-//   CURVE_FITTING_COST(double x, double y, double range, double theta):x_(x), y_(y), range_(range), theta_(theta)
-//   {
-//     // double alpha = - 2.0 / 180.0 * M_PI;
-//     // x_ = cos(alpha) * x - sin(alpha) * y;
-//     // y_ = sin(alpha) * x + cos(alpha) * y;
-//      x_ = x;
-//      y_ = y;
-//     range_ = range;
-//     theta_ = theta / 180 * M_PI;
+struct CURVE_FITTING_COST
+{
+  CURVE_FITTING_COST(double x, double y, double range, double theta):x_(x), y_(y), range_(range), theta_(theta)
+  {
+    // double alpha = - 2.0 / 180.0 * M_PI;
+    // x_ = cos(alpha) * x - sin(alpha) * y;
+    // y_ = sin(alpha) * x + cos(alpha) * y;
+     x_ = x;
+     y_ = y;
+    range_ = range;
+    theta_ = theta / 180 * M_PI;
 
-//   }
-//   template <typename T>
-//   bool operator()(const T* const para,T* residual)const        //para[2]={H-h, theta_offset}
-//   {
-//     // residual[0] = T(x_) - T(range_) * T(cos(T(theta_)) + para[2]) * para[1] / para[0];
-//     // residual[0] = T(y_) - sqrt(pow(T(range_ * cos(theta_ + para[1])), 2) - pow((para[0]), 2));
-//     //residual[0] = T(y_) - T(range_ * cos(theta_ + para[0]));
+  }
+  template <typename T>
+  bool operator()(const T* const para,T* residual)const        //para[2]={H-h, theta_offset}
+  {
+    // residual[0] = T(x_) - T(range_) * T(cos(T(theta_)) + para[2]) * para[1] / para[0];
+    // residual[0] = T(y_) - sqrt(pow(T(range_ * cos(theta_ + para[1])), 2) - pow((para[0]), 2));
+    //residual[0] = T(y_) - T(range_ * cos(theta_ + para[0]));
 
 
-//     T x_project = x_*cos(para[0]) - y_*sin(para[0]);
-//     T y_project = x_*sin(para[0]) + y_*cos(para[0]);
-//     residual[0] = T(y_project) - sqrt(T(pow(range_ * cos(theta_), 2) ) - pow(T(6.0), 2)); //- T(1.0);
-//     residual[1] = T(x_project) - T(range_) * T(sin(T(theta_)));
-//     return true;
-//   }
-//   double x_, y_, range_, theta_;
-// };
+    T x_project = x_*cos(para[0]) - y_*sin(para[0]);
+    T y_project = x_*sin(para[0]) + y_*cos(para[0]);
+    residual[0] = T(y_project) - sqrt(T(pow(range_ * cos(theta_), 2) ) - pow(T(6.0), 2)); //- T(1.0);
+    residual[1] = T(x_project) - T(range_) * T(sin(T(theta_)));
+    return true;
+  }
+  double x_, y_, range_, theta_;
+};
 
-// void optimize(std::vector<CalibData> calibDataVec)
-// {
-//   double para[1] = {1.3};  // 初始化para[2] = {H-h, theta_offset};
-//   ceres::Problem problem;
-//   // for(int i=0;i<calibDataVec.size(); i++)
-//   for(int i =0 ; i < calibDataVec.size() ; i ++)
-//   {
-//     problem.AddResidualBlock(
-//       new ceres::AutoDiffCostFunction<CURVE_FITTING_COST,2,1>(
-//         new CURVE_FITTING_COST(calibDataVec[i].x, calibDataVec[i].y, calibDataVec[i].r, calibDataVec[i].theta)
-//       ),
-//       nullptr,
-//       para
-//     );
+void optimize(std::vector<CalibData> calibDataVec)
+{
+  double para[1] = {1.3};  // 初始化para[2] = {H-h, theta_offset};
+  ceres::Problem problem;
+  // for(int i=0;i<calibDataVec.size(); i++)
+  for(int i =0 ; i < calibDataVec.size() ; i ++)
+  {
+    problem.AddResidualBlock(
+      new ceres::AutoDiffCostFunction<CURVE_FITTING_COST,2,1>(
+        new CURVE_FITTING_COST(calibDataVec[i].x, calibDataVec[i].y, calibDataVec[i].r, calibDataVec[i].theta)
+      ),
+      nullptr,
+      para
+    );
    
-//   }
-//   std::cout<<"333333"<<std::endl;
-// //配置求解器并求解，输出结果
-//   ceres::Solver::Options options;
-//   options.linear_solver_type=ceres::DENSE_QR;
-//   options.minimizer_progress_to_stdout=true;
-//   ceres::Solver::Summary summary;
-//   ceres::Solve(options,&problem,&summary);
-//   cout<<"theta= "<<para[0] / M_PI * 180.0<<endl;
-// }
+  }
+  std::cout<<"333333"<<std::endl;
+//配置求解器并求解，输出结果
+  ceres::Solver::Options options;
+  options.linear_solver_type=ceres::DENSE_QR;
+  options.minimizer_progress_to_stdout=true;
+  ceres::Solver::Summary summary;
+  ceres::Solve(options,&problem,&summary);
+  std::cout<<"theta= "<<para[0] / M_PI * 180.0<<std::endl;
+}
 
 int main(int argc, char *argv[])
 {
-  std::string data_path = "../data/calib_data.txt";
+  std::string config_file = "../data/config_calib.yaml";
+  std::string data_path;  //calib_data_file
+  double lat0=0, lon0=0, h0=0;
+  ReadConfigfile(config_file, data_path, lat0, lon0, h0);
+
+  const GeographicLib::Geocentric& earth = GeographicLib::Geocentric::WGS84();
+  GeographicLib::LocalCartesian gps_trans(lat0, lon0, h0, earth); //以原点构建局部坐标系(东北天)
+
   std::vector<CalibData> calib_datas;
   readCalibData(data_path, calib_datas);
   for(int i = 0; i < calib_datas.size(); i++)

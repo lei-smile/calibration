@@ -1,0 +1,9 @@
+%YAML:1.0
+---
+
+#原点位置的经纬高
+lat0: 30.63678740
+lon0: 114.16599780
+height0: 8.146
+#相关文件路径
+calib_data_file: "../data/calib_data.txt"
