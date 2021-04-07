@@ -10,6 +10,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX
+  "CERES_FOUND"
   "GFLAGS_IS_A_DLL=0"
   )
 
@@ -17,6 +18,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../include"
   "/usr/include/eigen3"
+  "/usr/local/include/opencv4"
   )
 
 # Targets to which this target links.
