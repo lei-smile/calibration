@@ -111,44 +111,84 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named GPStoXYZ
+# Target rules for targets named radar_static_calib
 
 # Build rule for target.
-GPStoXYZ: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 GPStoXYZ
-.PHONY : GPStoXYZ
+radar_static_calib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 radar_static_calib
+.PHONY : radar_static_calib
 
 # fast build rule for target.
-GPStoXYZ/fast:
-	$(MAKE) -f CMakeFiles/GPStoXYZ.dir/build.make CMakeFiles/GPStoXYZ.dir/build
-.PHONY : GPStoXYZ/fast
+radar_static_calib/fast:
+	$(MAKE) -f CMakeFiles/radar_static_calib.dir/build.make CMakeFiles/radar_static_calib.dir/build
+.PHONY : radar_static_calib/fast
 
-src/GPStoXYZ.o: src/GPStoXYZ.cpp.o
+#=============================================================================
+# Target rules for targets named radar_static_calib_yaw
 
-.PHONY : src/GPStoXYZ.o
+# Build rule for target.
+radar_static_calib_yaw: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 radar_static_calib_yaw
+.PHONY : radar_static_calib_yaw
+
+# fast build rule for target.
+radar_static_calib_yaw/fast:
+	$(MAKE) -f CMakeFiles/radar_static_calib_yaw.dir/build.make CMakeFiles/radar_static_calib_yaw.dir/build
+.PHONY : radar_static_calib_yaw/fast
+
+src/radar_static_calib.o: src/radar_static_calib.cpp.o
+
+.PHONY : src/radar_static_calib.o
 
 # target to build an object file
-src/GPStoXYZ.cpp.o:
-	$(MAKE) -f CMakeFiles/GPStoXYZ.dir/build.make CMakeFiles/GPStoXYZ.dir/src/GPStoXYZ.cpp.o
-.PHONY : src/GPStoXYZ.cpp.o
+src/radar_static_calib.cpp.o:
+	$(MAKE) -f CMakeFiles/radar_static_calib.dir/build.make CMakeFiles/radar_static_calib.dir/src/radar_static_calib.cpp.o
+.PHONY : src/radar_static_calib.cpp.o
 
-src/GPStoXYZ.i: src/GPStoXYZ.cpp.i
+src/radar_static_calib.i: src/radar_static_calib.cpp.i
 
-.PHONY : src/GPStoXYZ.i
+.PHONY : src/radar_static_calib.i
 
 # target to preprocess a source file
-src/GPStoXYZ.cpp.i:
-	$(MAKE) -f CMakeFiles/GPStoXYZ.dir/build.make CMakeFiles/GPStoXYZ.dir/src/GPStoXYZ.cpp.i
-.PHONY : src/GPStoXYZ.cpp.i
+src/radar_static_calib.cpp.i:
+	$(MAKE) -f CMakeFiles/radar_static_calib.dir/build.make CMakeFiles/radar_static_calib.dir/src/radar_static_calib.cpp.i
+.PHONY : src/radar_static_calib.cpp.i
 
-src/GPStoXYZ.s: src/GPStoXYZ.cpp.s
+src/radar_static_calib.s: src/radar_static_calib.cpp.s
 
-.PHONY : src/GPStoXYZ.s
+.PHONY : src/radar_static_calib.s
 
 # target to generate assembly for a file
-src/GPStoXYZ.cpp.s:
-	$(MAKE) -f CMakeFiles/GPStoXYZ.dir/build.make CMakeFiles/GPStoXYZ.dir/src/GPStoXYZ.cpp.s
-.PHONY : src/GPStoXYZ.cpp.s
+src/radar_static_calib.cpp.s:
+	$(MAKE) -f CMakeFiles/radar_static_calib.dir/build.make CMakeFiles/radar_static_calib.dir/src/radar_static_calib.cpp.s
+.PHONY : src/radar_static_calib.cpp.s
+
+src/radar_static_calib_yaw.o: src/radar_static_calib_yaw.cpp.o
+
+.PHONY : src/radar_static_calib_yaw.o
+
+# target to build an object file
+src/radar_static_calib_yaw.cpp.o:
+	$(MAKE) -f CMakeFiles/radar_static_calib_yaw.dir/build.make CMakeFiles/radar_static_calib_yaw.dir/src/radar_static_calib_yaw.cpp.o
+.PHONY : src/radar_static_calib_yaw.cpp.o
+
+src/radar_static_calib_yaw.i: src/radar_static_calib_yaw.cpp.i
+
+.PHONY : src/radar_static_calib_yaw.i
+
+# target to preprocess a source file
+src/radar_static_calib_yaw.cpp.i:
+	$(MAKE) -f CMakeFiles/radar_static_calib_yaw.dir/build.make CMakeFiles/radar_static_calib_yaw.dir/src/radar_static_calib_yaw.cpp.i
+.PHONY : src/radar_static_calib_yaw.cpp.i
+
+src/radar_static_calib_yaw.s: src/radar_static_calib_yaw.cpp.s
+
+.PHONY : src/radar_static_calib_yaw.s
+
+# target to generate assembly for a file
+src/radar_static_calib_yaw.cpp.s:
+	$(MAKE) -f CMakeFiles/radar_static_calib_yaw.dir/build.make CMakeFiles/radar_static_calib_yaw.dir/src/radar_static_calib_yaw.cpp.s
+.PHONY : src/radar_static_calib_yaw.cpp.s
 
 # Help Target
 help:
@@ -157,11 +197,15 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... GPStoXYZ"
 	@echo "... edit_cache"
-	@echo "... src/GPStoXYZ.o"
-	@echo "... src/GPStoXYZ.i"
-	@echo "... src/GPStoXYZ.s"
+	@echo "... radar_static_calib"
+	@echo "... radar_static_calib_yaw"
+	@echo "... src/radar_static_calib.o"
+	@echo "... src/radar_static_calib.i"
+	@echo "... src/radar_static_calib.s"
+	@echo "... src/radar_static_calib_yaw.o"
+	@echo "... src/radar_static_calib_yaw.i"
+	@echo "... src/radar_static_calib_yaw.s"
 .PHONY : help
 
 

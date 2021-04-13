@@ -71,5 +71,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/GPStoXYZ.dir/DependInfo.cmake"
+  "CMakeFiles/radar_static_calib.dir/DependInfo.cmake"
+  "CMakeFiles/radar_static_calib_yaw.dir/DependInfo.cmake"
   )

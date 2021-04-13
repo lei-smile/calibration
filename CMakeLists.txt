@@ -12,8 +12,11 @@ include_directories(include
 )
 
 
-add_executable(GPStoXYZ src/GPStoXYZ.cpp)
-target_link_libraries(GPStoXYZ ${GeographicLib_LIBRARIES} ${CERES_LIBRARIES} ${OpenCV_LIBS})
+add_executable(radar_static_calib src/radar_static_calib.cpp)
+target_link_libraries(radar_static_calib ${GeographicLib_LIBRARIES} ${CERES_LIBRARIES} ${OpenCV_LIBS})
+
+add_executable(radar_static_calib_yaw src/radar_static_calib_yaw.cpp)
+target_link_libraries(radar_static_calib_yaw ${GeographicLib_LIBRARIES} ${CERES_LIBRARIES} ${OpenCV_LIBS})
 
 
 set(CMAKE_BUILD_TYPE Debug)
