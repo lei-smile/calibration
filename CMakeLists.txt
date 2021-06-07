@@ -12,11 +12,13 @@ include_directories(include
 )
 
 
-add_executable(radar_static_calib src/radar_static_calib.cpp)
-target_link_libraries(radar_static_calib ${GeographicLib_LIBRARIES} ${CERES_LIBRARIES} ${OpenCV_LIBS})
 
-add_executable(radar_static_calib_yaw src/radar_static_calib_yaw.cpp)
-target_link_libraries(radar_static_calib_yaw ${GeographicLib_LIBRARIES} ${CERES_LIBRARIES} ${OpenCV_LIBS})
+add_executable(cam_calib src/cam2RTK_calib.cpp)
+target_link_libraries(cam_calib ${GeographicLib_LIBRARIES} ${OpenCV_LIBS})
+
+add_executable(check_cam_calib src/check_cam_calib.cpp)
+target_link_libraries(check_cam_calib ${GeographicLib_LIBRARIES} ${OpenCV_LIBS})
+
 
 
 set(CMAKE_BUILD_TYPE Debug)
