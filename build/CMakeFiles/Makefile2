@@ -65,76 +65,39 @@ CMAKE_SOURCE_DIR = /home/wulei/1、GIT/calibration
 CMAKE_BINARY_DIR = /home/wulei/1、GIT/calibration/build
 
 #=============================================================================
-# Target rules for target CMakeFiles/cam_calib.dir
+# Target rules for target CMakeFiles/lidar_repro.dir
 
 # All Build rule for target.
-CMakeFiles/cam_calib.dir/all:
-	$(MAKE) -f CMakeFiles/cam_calib.dir/build.make CMakeFiles/cam_calib.dir/depend
-	$(MAKE) -f CMakeFiles/cam_calib.dir/build.make CMakeFiles/cam_calib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wulei/1、GIT/calibration/build/CMakeFiles --progress-num=1,2 "Built target cam_calib"
-.PHONY : CMakeFiles/cam_calib.dir/all
+CMakeFiles/lidar_repro.dir/all:
+	$(MAKE) -f CMakeFiles/lidar_repro.dir/build.make CMakeFiles/lidar_repro.dir/depend
+	$(MAKE) -f CMakeFiles/lidar_repro.dir/build.make CMakeFiles/lidar_repro.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wulei/1、GIT/calibration/build/CMakeFiles --progress-num=1,2 "Built target lidar_repro"
+.PHONY : CMakeFiles/lidar_repro.dir/all
 
 # Include target in all.
-all: CMakeFiles/cam_calib.dir/all
+all: CMakeFiles/lidar_repro.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/cam_calib.dir/rule: cmake_check_build_system
+CMakeFiles/lidar_repro.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wulei/1、GIT/calibration/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/cam_calib.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/lidar_repro.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wulei/1、GIT/calibration/build/CMakeFiles 0
-.PHONY : CMakeFiles/cam_calib.dir/rule
+.PHONY : CMakeFiles/lidar_repro.dir/rule
 
 # Convenience name for target.
-cam_calib: CMakeFiles/cam_calib.dir/rule
+lidar_repro: CMakeFiles/lidar_repro.dir/rule
 
-.PHONY : cam_calib
-
-# clean rule for target.
-CMakeFiles/cam_calib.dir/clean:
-	$(MAKE) -f CMakeFiles/cam_calib.dir/build.make CMakeFiles/cam_calib.dir/clean
-.PHONY : CMakeFiles/cam_calib.dir/clean
+.PHONY : lidar_repro
 
 # clean rule for target.
-clean: CMakeFiles/cam_calib.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/check_cam_calib.dir
-
-# All Build rule for target.
-CMakeFiles/check_cam_calib.dir/all:
-	$(MAKE) -f CMakeFiles/check_cam_calib.dir/build.make CMakeFiles/check_cam_calib.dir/depend
-	$(MAKE) -f CMakeFiles/check_cam_calib.dir/build.make CMakeFiles/check_cam_calib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wulei/1、GIT/calibration/build/CMakeFiles --progress-num=3,4 "Built target check_cam_calib"
-.PHONY : CMakeFiles/check_cam_calib.dir/all
-
-# Include target in all.
-all: CMakeFiles/check_cam_calib.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/check_cam_calib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wulei/1、GIT/calibration/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/check_cam_calib.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wulei/1、GIT/calibration/build/CMakeFiles 0
-.PHONY : CMakeFiles/check_cam_calib.dir/rule
-
-# Convenience name for target.
-check_cam_calib: CMakeFiles/check_cam_calib.dir/rule
-
-.PHONY : check_cam_calib
+CMakeFiles/lidar_repro.dir/clean:
+	$(MAKE) -f CMakeFiles/lidar_repro.dir/build.make CMakeFiles/lidar_repro.dir/clean
+.PHONY : CMakeFiles/lidar_repro.dir/clean
 
 # clean rule for target.
-CMakeFiles/check_cam_calib.dir/clean:
-	$(MAKE) -f CMakeFiles/check_cam_calib.dir/build.make CMakeFiles/check_cam_calib.dir/clean
-.PHONY : CMakeFiles/check_cam_calib.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/check_cam_calib.dir/clean
+clean: CMakeFiles/lidar_repro.dir/clean
 
 .PHONY : clean
 

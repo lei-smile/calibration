@@ -1,24 +1,19 @@
-cmake_minimum_required(VERSION 3.1.0)
-project(sensor_calib)
+cmake_minimum_required(VERSION 3.5)
+project(lidar2cam_calib)
 
-find_package (GeographicLib REQUIRED)
-find_package(Eigen3 REQUIRED)
-find_package(Ceres REQUIRED)
+#set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+
 find_package(OpenCV REQUIRED)
 
-include_directories(include
-                    ${CERES_INCLUDE_DIRS}
-                    ${OpenCV_INCLUDE_DIRS}
-)
+include_directories(${PROJECT_SOURCE_DIR}/include 
+                    ${OpenCV_INCLUDE_DIRS}/include
+                    /usr/include)
 
+link_directories(${PROJECT_SOURCE_DIR}/lib
+                 /usr/lib)
 
+add_executable(lidar_repro src/lidar_reproject.cpp)
+target_link_libraries(lidar_repro ${OpenCV_LIBS})
 
-add_executable(cam_calib src/cam2RTK_calib.cpp)
-target_link_libraries(cam_calib ${GeographicLib_LIBRARIES} ${OpenCV_LIBS})
-
-add_executable(check_cam_calib src/check_cam_calib.cpp)
-target_link_libraries(check_cam_calib ${GeographicLib_LIBRARIES} ${OpenCV_LIBS})
-
-
-
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)

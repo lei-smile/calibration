@@ -111,84 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named cam_calib
+# Target rules for targets named lidar_repro
 
 # Build rule for target.
-cam_calib: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 cam_calib
-.PHONY : cam_calib
+lidar_repro: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 lidar_repro
+.PHONY : lidar_repro
 
 # fast build rule for target.
-cam_calib/fast:
-	$(MAKE) -f CMakeFiles/cam_calib.dir/build.make CMakeFiles/cam_calib.dir/build
-.PHONY : cam_calib/fast
+lidar_repro/fast:
+	$(MAKE) -f CMakeFiles/lidar_repro.dir/build.make CMakeFiles/lidar_repro.dir/build
+.PHONY : lidar_repro/fast
 
-#=============================================================================
-# Target rules for targets named check_cam_calib
+src/lidar_reproject.o: src/lidar_reproject.cpp.o
 
-# Build rule for target.
-check_cam_calib: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 check_cam_calib
-.PHONY : check_cam_calib
-
-# fast build rule for target.
-check_cam_calib/fast:
-	$(MAKE) -f CMakeFiles/check_cam_calib.dir/build.make CMakeFiles/check_cam_calib.dir/build
-.PHONY : check_cam_calib/fast
-
-src/cam2RTK_calib.o: src/cam2RTK_calib.cpp.o
-
-.PHONY : src/cam2RTK_calib.o
+.PHONY : src/lidar_reproject.o
 
 # target to build an object file
-src/cam2RTK_calib.cpp.o:
-	$(MAKE) -f CMakeFiles/cam_calib.dir/build.make CMakeFiles/cam_calib.dir/src/cam2RTK_calib.cpp.o
-.PHONY : src/cam2RTK_calib.cpp.o
+src/lidar_reproject.cpp.o:
+	$(MAKE) -f CMakeFiles/lidar_repro.dir/build.make CMakeFiles/lidar_repro.dir/src/lidar_reproject.cpp.o
+.PHONY : src/lidar_reproject.cpp.o
 
-src/cam2RTK_calib.i: src/cam2RTK_calib.cpp.i
+src/lidar_reproject.i: src/lidar_reproject.cpp.i
 
-.PHONY : src/cam2RTK_calib.i
-
-# target to preprocess a source file
-src/cam2RTK_calib.cpp.i:
-	$(MAKE) -f CMakeFiles/cam_calib.dir/build.make CMakeFiles/cam_calib.dir/src/cam2RTK_calib.cpp.i
-.PHONY : src/cam2RTK_calib.cpp.i
-
-src/cam2RTK_calib.s: src/cam2RTK_calib.cpp.s
-
-.PHONY : src/cam2RTK_calib.s
-
-# target to generate assembly for a file
-src/cam2RTK_calib.cpp.s:
-	$(MAKE) -f CMakeFiles/cam_calib.dir/build.make CMakeFiles/cam_calib.dir/src/cam2RTK_calib.cpp.s
-.PHONY : src/cam2RTK_calib.cpp.s
-
-src/check_cam_calib.o: src/check_cam_calib.cpp.o
-
-.PHONY : src/check_cam_calib.o
-
-# target to build an object file
-src/check_cam_calib.cpp.o:
-	$(MAKE) -f CMakeFiles/check_cam_calib.dir/build.make CMakeFiles/check_cam_calib.dir/src/check_cam_calib.cpp.o
-.PHONY : src/check_cam_calib.cpp.o
-
-src/check_cam_calib.i: src/check_cam_calib.cpp.i
-
-.PHONY : src/check_cam_calib.i
+.PHONY : src/lidar_reproject.i
 
 # target to preprocess a source file
-src/check_cam_calib.cpp.i:
-	$(MAKE) -f CMakeFiles/check_cam_calib.dir/build.make CMakeFiles/check_cam_calib.dir/src/check_cam_calib.cpp.i
-.PHONY : src/check_cam_calib.cpp.i
+src/lidar_reproject.cpp.i:
+	$(MAKE) -f CMakeFiles/lidar_repro.dir/build.make CMakeFiles/lidar_repro.dir/src/lidar_reproject.cpp.i
+.PHONY : src/lidar_reproject.cpp.i
 
-src/check_cam_calib.s: src/check_cam_calib.cpp.s
+src/lidar_reproject.s: src/lidar_reproject.cpp.s
 
-.PHONY : src/check_cam_calib.s
+.PHONY : src/lidar_reproject.s
 
 # target to generate assembly for a file
-src/check_cam_calib.cpp.s:
-	$(MAKE) -f CMakeFiles/check_cam_calib.dir/build.make CMakeFiles/check_cam_calib.dir/src/check_cam_calib.cpp.s
-.PHONY : src/check_cam_calib.cpp.s
+src/lidar_reproject.cpp.s:
+	$(MAKE) -f CMakeFiles/lidar_repro.dir/build.make CMakeFiles/lidar_repro.dir/src/lidar_reproject.cpp.s
+.PHONY : src/lidar_reproject.cpp.s
 
 # Help Target
 help:
@@ -197,15 +157,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... lidar_repro"
 	@echo "... edit_cache"
-	@echo "... cam_calib"
-	@echo "... check_cam_calib"
-	@echo "... src/cam2RTK_calib.o"
-	@echo "... src/cam2RTK_calib.i"
-	@echo "... src/cam2RTK_calib.s"
-	@echo "... src/check_cam_calib.o"
-	@echo "... src/check_cam_calib.i"
-	@echo "... src/check_cam_calib.s"
+	@echo "... src/lidar_reproject.o"
+	@echo "... src/lidar_reproject.i"
+	@echo "... src/lidar_reproject.s"
 .PHONY : help
 
 
