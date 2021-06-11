@@ -51,5 +51,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/lidar2cam_calib.dir/DependInfo.cmake"
   "CMakeFiles/lidar_repro.dir/DependInfo.cmake"
   )

@@ -65,13 +65,50 @@ CMAKE_SOURCE_DIR = /home/wulei/1、GIT/calibration
 CMAKE_BINARY_DIR = /home/wulei/1、GIT/calibration/build
 
 #=============================================================================
+# Target rules for target CMakeFiles/lidar2cam_calib.dir
+
+# All Build rule for target.
+CMakeFiles/lidar2cam_calib.dir/all:
+	$(MAKE) -f CMakeFiles/lidar2cam_calib.dir/build.make CMakeFiles/lidar2cam_calib.dir/depend
+	$(MAKE) -f CMakeFiles/lidar2cam_calib.dir/build.make CMakeFiles/lidar2cam_calib.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wulei/1、GIT/calibration/build/CMakeFiles --progress-num=1,2 "Built target lidar2cam_calib"
+.PHONY : CMakeFiles/lidar2cam_calib.dir/all
+
+# Include target in all.
+all: CMakeFiles/lidar2cam_calib.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/lidar2cam_calib.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wulei/1、GIT/calibration/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/lidar2cam_calib.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wulei/1、GIT/calibration/build/CMakeFiles 0
+.PHONY : CMakeFiles/lidar2cam_calib.dir/rule
+
+# Convenience name for target.
+lidar2cam_calib: CMakeFiles/lidar2cam_calib.dir/rule
+
+.PHONY : lidar2cam_calib
+
+# clean rule for target.
+CMakeFiles/lidar2cam_calib.dir/clean:
+	$(MAKE) -f CMakeFiles/lidar2cam_calib.dir/build.make CMakeFiles/lidar2cam_calib.dir/clean
+.PHONY : CMakeFiles/lidar2cam_calib.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/lidar2cam_calib.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/lidar_repro.dir
 
 # All Build rule for target.
 CMakeFiles/lidar_repro.dir/all:
 	$(MAKE) -f CMakeFiles/lidar_repro.dir/build.make CMakeFiles/lidar_repro.dir/depend
 	$(MAKE) -f CMakeFiles/lidar_repro.dir/build.make CMakeFiles/lidar_repro.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wulei/1、GIT/calibration/build/CMakeFiles --progress-num=1,2 "Built target lidar_repro"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wulei/1、GIT/calibration/build/CMakeFiles --progress-num=3,4 "Built target lidar_repro"
 .PHONY : CMakeFiles/lidar_repro.dir/all
 
 # Include target in all.

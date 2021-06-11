@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named lidar2cam_calib
+
+# Build rule for target.
+lidar2cam_calib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 lidar2cam_calib
+.PHONY : lidar2cam_calib
+
+# fast build rule for target.
+lidar2cam_calib/fast:
+	$(MAKE) -f CMakeFiles/lidar2cam_calib.dir/build.make CMakeFiles/lidar2cam_calib.dir/build
+.PHONY : lidar2cam_calib/fast
+
+#=============================================================================
 # Target rules for targets named lidar_repro
 
 # Build rule for target.
@@ -122,6 +135,33 @@ lidar_repro: cmake_check_build_system
 lidar_repro/fast:
 	$(MAKE) -f CMakeFiles/lidar_repro.dir/build.make CMakeFiles/lidar_repro.dir/build
 .PHONY : lidar_repro/fast
+
+src/lidar2cam_calib.o: src/lidar2cam_calib.cpp.o
+
+.PHONY : src/lidar2cam_calib.o
+
+# target to build an object file
+src/lidar2cam_calib.cpp.o:
+	$(MAKE) -f CMakeFiles/lidar2cam_calib.dir/build.make CMakeFiles/lidar2cam_calib.dir/src/lidar2cam_calib.cpp.o
+.PHONY : src/lidar2cam_calib.cpp.o
+
+src/lidar2cam_calib.i: src/lidar2cam_calib.cpp.i
+
+.PHONY : src/lidar2cam_calib.i
+
+# target to preprocess a source file
+src/lidar2cam_calib.cpp.i:
+	$(MAKE) -f CMakeFiles/lidar2cam_calib.dir/build.make CMakeFiles/lidar2cam_calib.dir/src/lidar2cam_calib.cpp.i
+.PHONY : src/lidar2cam_calib.cpp.i
+
+src/lidar2cam_calib.s: src/lidar2cam_calib.cpp.s
+
+.PHONY : src/lidar2cam_calib.s
+
+# target to generate assembly for a file
+src/lidar2cam_calib.cpp.s:
+	$(MAKE) -f CMakeFiles/lidar2cam_calib.dir/build.make CMakeFiles/lidar2cam_calib.dir/src/lidar2cam_calib.cpp.s
+.PHONY : src/lidar2cam_calib.cpp.s
 
 src/lidar_reproject.o: src/lidar_reproject.cpp.o
 
@@ -157,8 +197,12 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... lidar_repro"
 	@echo "... edit_cache"
+	@echo "... lidar2cam_calib"
+	@echo "... lidar_repro"
+	@echo "... src/lidar2cam_calib.o"
+	@echo "... src/lidar2cam_calib.i"
+	@echo "... src/lidar2cam_calib.s"
 	@echo "... src/lidar_reproject.o"
 	@echo "... src/lidar_reproject.i"
 	@echo "... src/lidar_reproject.s"

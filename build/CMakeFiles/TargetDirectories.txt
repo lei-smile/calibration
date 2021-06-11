@@ -1,3 +1,4 @@
 /home/wulei/1、GIT/calibration/build/CMakeFiles/rebuild_cache.dir
-/home/wulei/1、GIT/calibration/build/CMakeFiles/lidar_repro.dir
 /home/wulei/1、GIT/calibration/build/CMakeFiles/edit_cache.dir
+/home/wulei/1、GIT/calibration/build/CMakeFiles/lidar2cam_calib.dir
+/home/wulei/1、GIT/calibration/build/CMakeFiles/lidar_repro.dir

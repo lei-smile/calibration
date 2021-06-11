@@ -13,6 +13,9 @@ include_directories(${PROJECT_SOURCE_DIR}/include
 link_directories(${PROJECT_SOURCE_DIR}/lib
                  /usr/lib)
 
+add_executable(lidar2cam_calib src/lidar2cam_calib.cpp)
+target_link_libraries(lidar2cam_calib ${OpenCV_LIBS})
+
 add_executable(lidar_repro src/lidar_reproject.cpp)
 target_link_libraries(lidar_repro ${OpenCV_LIBS})
 
